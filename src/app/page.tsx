@@ -12,7 +12,7 @@ const featureCards = [
   },
   {
     title: "Future-proof your knowledge",
-    body: "Your AI clone remembers everything. Your mind, your voice, your rules.",
+    body: "Your AI clone remembers everything.",
     accent: "from-[#5d7bff] to-[#7cb3ff]",
     image: "/ai-dash-briefings.svg",
     alt: "AI briefing board synthesizing feedback and drafts",
@@ -49,14 +49,12 @@ export default function Home() {
         <section id="top" className="section-shell space-y-12 pt-20 pb-16 text-center">
           <FadeIn className="space-y-4">
             <div className="space-y-2">
-              <p className="text-lg font-semibold text-[#0c172a]">SecondBrain.</p>
+              <p className="text-lg font-semibold text-[#0c172a]">🧠</p>
               <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              Your AI clone answers for you
-              </h1>
+              Your Brain Is Doing Too Much </h1>
             </div>
             <p className="mx-auto max-w-2xl text-base text-[var(--text-secondary)]">
-            Train it on your data. Get questions answered without repeating yourself.
-            </p>
+            SecondBrain is your AI clone — trained on how you think, write, and decide.            </p>
             <form className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center" action="#cta">
               <label className="sr-only" htmlFor="hero-email">
                 Work email
@@ -332,8 +330,7 @@ export default function Home() {
           <div className="section-shell flex min-h-[300px] flex-col justify-center space-y-8 py-8 text-[#0f0a1f] md:min-h-[380px]">
             <FadeIn className="text-center space-y-3">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                What teams say
-              </h2>
+Hear from early superhumans            </h2>
             </FadeIn>
             <div className="grid gap-8 md:grid-cols-2">
               {[
@@ -399,8 +396,7 @@ export default function Home() {
                 </div>
                 <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">How SecondBrain works</h2>
                 <p className="text-base text-white/85">
-                  Connect your sources, train your AI clone, and share it wherever questions happen.
-                </p>
+3 simple steps:                </p>
                 <div className="flex justify-center pt-2">
                   <a
                     href="#cta"
@@ -451,8 +447,6 @@ export default function Home() {
           <div className="space-y-3 pb-4">
             {[
               "What is SecondBrain?",
-              "How is SecondBrain part of the Superhuman suite?",
-              "How is SecondBrain different from other writing tools?",
               "Is my data secure with SecondBrain?",
               "Do I need to install anything to use SecondBrain?",
             ].map((question, idx) => (
@@ -464,10 +458,6 @@ export default function Home() {
                       ˅
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                    SecondBrain delivers AI writing assistance across your apps and devices, keeping your work secure and
-                    polished from draft to send.
-                  </p>
                 </details>
               </FadeIn>
             ))}
@@ -480,9 +470,6 @@ export default function Home() {
               <h3 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               Scale your expertise in every moment
               </h3>
-              <p className="max-w-3xl text-base text-white/80">
-              SecondBrain clones your thinking so your team gets answers instantly, and you move faster without the interruptions.
-              </p>
             </FadeIn>
             <FadeIn>
               <form className="flex flex-col gap-3 sm:flex-row sm:items-center" action="#top">
