@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --bg-dark: #0f2933;
+  --bg-deep: #0b2029;
+  --bg-light: #f5f7fb;
+  --surface: #ffffff;
+  --muted: #e5ebf4;
+  --text-primary: #0c1420;
+  --text-secondary: #455064;
+  --accent: #6f4bff;
+  --accent-2: #18c2a4;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+}
+
+@theme inline {
+  --color-background: var(--bg-light);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-light);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    padding: 0 18px;
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.grid-backdrop {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.18) 1px, transparent 0);
+  background-size: 44px 44px;
+  opacity: 0.25;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Second Brain — AI replicas that answer with sources</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f1419;
+      --bg-darker: #0b0f14;
+      --bg-light: #f8f7f4;
+      --text-primary: #0e1116;
+      --text-secondary: #4b5563;
+      --accent: #0066ff;
+      --accent-2: #00a896;
+      --success: #2ecc71;
+      --border: #e6e6e6;
+      --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.15);
+      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.25);
+      --radius-lg: 20px;
+      --radius-sm: 12px;
+      --max-width: 1200px;
+      --transition: 200ms ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .layout {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      transition: background 200ms ease, box-shadow 200ms ease, border 200ms ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #4da3ff);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #cdd5e0;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .nav-links a:hover, .nav-links a:focus-visible {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      outline: none;
+    }
+
+    .ghost-btn {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      transition: transform var(--transition), border var(--transition), box-shadow var(--transition);
+    }
+
+    .ghost-btn:hover, .ghost-btn:focus-visible {
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.35);
+      transform: translateY(-1px) scale(1.01);
+      outline: none;
+    }
+
+    .nav-scrolled {
+      background: rgba(15, 20, 25, 0.92);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.12), transparent 35%), radial-gradient(circle at 80% 10%, rgba(0, 168, 150, 0.08), transparent 30%), var(--bg-dark);
+      color: #f6f7fb;
+      padding: 110px 0 120px;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity: 0.85;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(0, 102, 255, 0.4), transparent 55%);
+      top: -80px;
+      right: -120px;
+    }
+
+    .hero::after {
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(0, 168, 150, 0.35), transparent 60%);
+      bottom: -120px;
+      left: -60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: #d0e3ff;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(0, 102, 255, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(42px, 5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 20px 0 16px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 3.4vw, 42px);
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+      color: inherit;
+    }
+
+    .subhead {
+      font-size: 20px;
+      color: #cfd6e2;
+      margin: 0 0 30px;
+      max-width: 560px;
+    }
+
+    .form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .input {
+      flex: 1;
+      min-width: 260px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      transition: border var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .input:focus-visible {
+      outline: none;
+      border-color: rgba(0, 102, 255, 0.8);
+      box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .input.error {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--accent), #3a8dff);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      min-width: 150px;
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+      box-shadow: 0 16px 40px rgba(0, 102, 255, 0.35);
+    }
+
+    .primary-btn:hover, .primary-btn:focus-visible {
+      outline: none;
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(0, 102, 255, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .primary-btn:active { transform: translateY(0); }
+
+    .hint {
+      color: #9fb3cc;
+      font-size: 14px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hint strong { color: #fff; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 360px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(0, 102, 255, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 32px;
+      overflow: hidden;
+      padding: 32px;
+      box-shadow: var(--shadow-strong);
+      isolation: isolate;
+    }
+
+    .orb {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      filter: blur(18px);
+      opacity: 0.65;
+      transition: transform 600ms ease;
+      will-change: transform;
+    }
+
+    .orb.blue { background: radial-gradient(circle, rgba(0, 102, 255, 0.8), transparent 60%); top: 24px; right: 24px; }
+    .orb.teal { background: radial-gradient(circle, rgba(0, 168, 150, 0.75), transparent 60%); bottom: 24px; left: 20%; }
+    .orb.white { background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent 55%); top: 35%; left: 40%; }
+
+    .visual-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .node {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 18px;
+      color: #e3ecf6;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .node::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.07), rgba(0, 168, 150, 0.07));
+      pointer-events: none;
+    }
+
+    .node strong { display: block; font-size: 16px; margin-bottom: 6px; }
+    .node small { color: #9fb3cc; }
+
+    .citation-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(46, 204, 113, 0.15);
+      color: #c7ffd9;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section.light { background: #fff; }
+    .section.subtle { background: linear-gradient(180deg, #fff, #f6f9ff); }
+    .section.dark { background: var(--bg-dark); color: #e6eef6; }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 60px;
+    }
+
+    .section-header p { color: var(--text-secondary); margin: 0; }
+    .section.dark .section-header p { color: #9fb3cc; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.06);
+      transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+    }
+
+    .card:hover, .card:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+      border-color: rgba(0, 102, 255, 0.35);
+      outline: none;
+    }
+
+    .section.dark .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dfe8f3;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.12), rgba(0, 168, 150, 0.12));
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .use-cases { gap: 18px; }
+    .use-cases .card { padding: 18px; }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text-secondary);
+    }
+
+    .list strong { color: var(--text-primary); }
+    .section.dark .list li { color: #9fb3cc; }
+    .section.dark .list strong { color: #fff; }
+
+    .bullet {
+      width: 12px;
+      height: 12px;
+      margin-top: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(0, 102, 255, 0.08);
+      flex-shrink: 0;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .step {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
+    }
+
+    .step::before {
+      content: attr(data-step);
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), #1c7bff);
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 102, 255, 0.1);
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .trust-pills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .trust-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .trust-pill .icon { margin: 0; }
+
+    .social-placeholder {
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.04), rgba(0, 168, 150, 0.04));
+    }
+
+    .cta {
+      text-align: center;
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+    }
+
+    .cta .form {
+      justify-content: center;
+    }
+
+    footer {
+      padding: 36px 0 60px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 600ms ease, transform 600ms ease;
+      will-change: opacity, transform;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav { background: rgba(15, 20, 25, 0.95); border-bottom-color: rgba(255, 255, 255, 0.08); }
+      .nav-inner { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 90px 0 100px; }
+      .hero-grid { gap: 38px; }
+      .hero-visual { min-height: 300px; }
+    }
+
+    @media (max-width: 640px) {
+      .layout { padding: 0 18px; }
+      .section { padding: 80px 0; }
+      .form { flex-direction: column; align-items: stretch; }
+      .input { width: 100%; min-width: unset; }
+      .primary-btn { width: 100%; }
+      .hero-visual { border-radius: 24px; }
+      .cards, .steps, .trust-pills { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="layout nav-inner">
+      <div class="brand">
+        <span class="brand-badge">SB</span>
+        <span>Second Brain</span>
+      </div>
+      <div class="nav-links" aria-label="Primary">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#trust">Trust</a>
+        <a class="ghost-btn" href="#cta">Join waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="layout hero-grid">
+      <div class="hero-copy fade">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Lightning-fast decisions without the calendar math
+        </div>
+        <h1>Get feedback without booking time</h1>
+        <p class="subhead">AI employees trained on your team's actual thinking. Ask once and get source-cited answers in the voice of the people you trust most.</p>
+        <form class="form" id="hero-form" novalidate>
+          <label class="sr-only" for="hero-email">Email</label>
+          <input class="input" type="email" id="hero-email" name="email" placeholder="you@company.com" required aria-required="true" aria-label="Email">
+          <button class="primary-btn" type="submit">Join Waitlist</button>
+        </form>
+        <div class="hint">
+          <svg width="18" height="18" fill="none" aria-hidden="true"><path d="M7.167 12.5 3.5 8.833l1.178-1.178 2.489 2.489 5.155-5.155 1.178 1.178L7.167 12.5Z" fill="#2ecc71"/></svg>
+          <span>Every answer cites sources. <strong>No meetings required.</strong></span>
+        </div>
+        <p class="hint" id="hero-message" role="status" aria-live="polite"></p>
+      </div>
+      <div class="hero-visual fade" aria-hidden="true">
+        <div class="orb blue"></div>
+        <div class="orb teal"></div>
+        <div class="orb white"></div>
+        <div class="visual-grid">
+          <div class="node">
+            <strong>Deck Review</strong>
+            <small>"Slide 7 needs the decision tree you agreed on last quarter."</small>
+            <div class="citation-tag">
+              <span aria-hidden="true">●</span> Source: Ops email — Feb 14
+            </div>
+          </div>
+          <div class="node">
+            <strong>Decision Memo</strong>
+            <small>"Manager prefers Option B when ARR < $1M. Cite finance recap."</small>
+            <div class="citation-tag">
+              <span aria-hidden="true">●</span> Fact vs inference shown
+            </div>
+          </div>
+          <div class="node">
+            <strong>Project Plan</strong>
+            <small>"Add risk owner: Maya (as in the Q3 postmortem notes)."</small>
+            <div class="citation-tag">
+              <span aria-hidden="true">●</span> Source: Transcript — Q3 Sync
+            </div>
+          </div>
+          <div class="node">
+            <strong>Clarify Tone</strong>
+            <small>"Rewrite opener in the concise style your CTO likes."</small>
+          </div>
+          <div class="node">
+            <strong>Quick Check</strong>
+            <small>"Proceed. This matches priorities shared last Monday."</small>
+            <div class="citation-tag">
+              <span aria-hidden="true">●</span> Verified
+            </div>
+          </div>
+          <div class="node">
+            <strong>Answer with receipts</strong>
+            <small>"All responses link to the exact email, doc, or transcript."</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="problem" class="section light">
+      <div class="layout">
+        <div class="section-header fade">
+          <div class="tagline">The bottleneck</div>
+          <h2>You're waiting on other people to move forward</h2>
+          <p>Deck reviews sit in inboxes. Decision memos need another meeting. Good feedback is bottlenecked by busy calendars.</p>
+        </div>
+        <div class="cards">
+          <article class="card fade" tabindex="0">
+            <div class="icon">⏱</div>
+            <h3>Work slows down</h3>
+            <p>Hours lost nudging for comments and chasing context. Meanwhile, projects stall.</p>
+          </article>
+          <article class="card fade" tabindex="0">
+            <div class="icon">📧</div>
+            <h3>Context trapped</h3>
+            <p>Decisions live in emails, transcripts, and docs that no one has time to reread.</p>
+          </article>
+          <article class="card fade" tabindex="0">
+            <div class="icon">🗓</div>
+            <h3>Calendars gatekeep</h3>
+            <p>Important calls slip because the right people are double-booked.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section subtle">
+      <div class="layout">
+        <div class="section-header fade">
+          <div class="tagline">The answer</div>
+          <h2>Create AI replicas of your best thinkers</h2>
+          <p>Train them on real emails, transcripts, and decisions. Get feedback that actually sounds like them.</p>
+        </div>
+        <div class="cards use-cases">
+          <article class="card fade" tabindex="0">
+            <div class="icon">🗂</div>
+            <h3>Review decks</h3>
+            <p>Get your operator's feedback on presentations—instant notes with source links.</p>
+          </article>
+          <article class="card fade" tabindex="0">
+            <div class="icon">⚖️</div>
+            <h3>Make decisions</h3>
+            <p>Run choices by your manager without scheduling; see fact vs inference clearly.</p>
+          </article>
+          <article class="card fade" tabindex="0">
+            <div class="icon">🧭</div>
+            <h3>Plan projects</h3>
+            <p>Build plans that reflect your team lead's priorities—no calendar juggling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section light">
+      <div class="layout">
+        <div class="section-header fade">
+          <div class="tagline">How it works</div>
+          <h2>Connect, replicate, get answers with receipts</h2>
+          <p>Each response is grounded in real source material and keeps private data private.</p>
+        </div>
+        <div class="steps">
+          <article class="step fade" data-step="1">
+            <h3>Connect your data</h3>
+            <p>Link emails, transcripts, and documents. Select what to include; keep private items off-limits.</p>
+          </article>
+          <article class="step fade" data-step="2">
+            <h3>Create replicas</h3>
+            <p>Choose who to replicate. We model their voice, preferences, and decision patterns.</p>
+          </article>
+          <article class="step fade" data-step="3">
+            <h3>Get feedback</h3>
+            <p>Ask a question. Receive source-cited responses that separate fact from inference.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust" class="section dark">
+      <div class="layout">
+        <div class="section-header fade">
+          <div class="tagline" style="background: rgba(255,255,255,0.08); color: #e6eef6;">Why it stays trusted</div>
+          <h2>Built on trust, not novelty</h2>
+          <p>Every response cites source material and separates fact from inference.</p>
+        </div>
+        <div class="trust-pills">
+          <div class="trust-pill fade">
+            <div class="icon">🔗</div>
+            <h3>Source citations</h3>
+            <p>Every answer links to the exact email, doc, or transcript it used.</p>
+          </div>
+          <div class="trust-pill fade">
+            <div class="icon">🧠</div>
+            <h3>Fact vs. inference</h3>
+            <p>Clear separation between quoted facts and reasoned suggestions.</p>
+          </div>
+          <div class="trust-pill fade">
+            <div class="icon">🔒</div>
+            <h3>Private by default</h3>
+            <p>Your data stays yours with fine-grained control over what trains each replica.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light">
+      <div class="layout">
+        <div class="section-header fade">
+          <div class="tagline">Social proof, ready</div>
+          <h2>Designed for the teams that obsess over speed</h2>
+          <p>Placeholders for metrics and testimonials when you're ready to share them.</p>
+        </div>
+        <div class="social-placeholder fade">
+          Future slot for <strong>teams live</strong>, <strong>hours saved</strong>, or a testimonial carousel. The layout is reserved—drop in numbers when you have them.
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="section subtle">
+      <div class="layout">
+        <div class="cta fade">
+          <div class="tagline">Join the waitlist</div>
+          <h2>Stop scheduling. Start deciding.</h2>
+          <p>Join the waitlist for early access.</p>
+          <form class="form" id="cta-form" novalidate>
+            <label class="sr-only" for="cta-email">Email</label>
+            <input class="input" type="email" id="cta-email" name="email" placeholder="you@company.com" required aria-required="true" aria-label="Email">
+            <button class="primary-btn" type="submit">Join Waitlist</button>
+          </form>
+          <div class="hint" id="cta-message" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="layout">
+      © 2024 Second Brain — Precision answers, with citations.
+    </div>
+  </footer>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+
+  <script>
+    const nav = document.querySelector('nav');
+    const fades = document.querySelectorAll('.fade');
+    const orbs = document.querySelectorAll('.orb');
+    const forms = [
+      { form: document.getElementById('hero-form'), input: document.getElementById('hero-email'), message: document.getElementById('hero-message') },
+      { form: document.getElementById('cta-form'), input: document.getElementById('cta-email'), message: document.getElementById('cta-message') },
+    ];
+
+    const emailIsValid = (value) => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value);
+
+    const setNavState = () => {
+      const isScrolled = window.scrollY > 18;
+      nav.classList.toggle('nav-scrolled', isScrolled);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')),
+      { threshold: 0.18 }
+    );
+    fades.forEach((el) => observer.observe(el));
+
+    window.addEventListener('scroll', setNavState);
+    setNavState();
+
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.02;
+      orbs.forEach((orb, index) => {
+        const direction = index % 2 === 0 ? 1 : -1;
+        orb.style.transform = `translate3d(${offset * direction}px, ${offset * 0.6}px, 0)`;
+      });
+    });
+
+    forms.forEach(({ form, input, message }) => {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (!emailIsValid(value)) {
+          input.classList.add('error');
+          message.textContent = 'Enter a valid work email to join the waitlist.';
+          message.style.color = '#ff6b6b';
+          input.focus();
+          return;
+        }
+
+        input.classList.remove('error');
+        message.textContent = 'Saving your spot...';
+        message.style.color = '#9fb3cc';
+
+        setTimeout(() => {
+          message.textContent = 'You are in. Expect a fast follow-up.';
+          message.style.color = 'var(--success)';
+          form.reset();
+        }, 600);
+      });
+
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error') && emailIsValid(input.value)) {
+          input.classList.remove('error');
+          message.textContent = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

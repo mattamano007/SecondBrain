@@ -1,0 +1,33 @@
+<svg width="420" height="260" viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="260" rx="24" fill="url(#paint0_radial)"/>
+  <rect x="18" y="18" width="384" height="224" rx="20" fill="#0B1220" stroke="#7C3AED" stroke-opacity="0.4" stroke-width="2"/>
+  <rect x="40" y="40" width="168" height="180" rx="14" fill="#0F172A" stroke="#22D3EE" stroke-opacity="0.45" stroke-width="2"/>
+  <rect x="214" y="40" width="168" height="56" rx="12" fill="#0F172A" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="2"/>
+  <rect x="214" y="108" width="168" height="112" rx="12" fill="#0F172A" stroke="#F472B6" stroke-opacity="0.45" stroke-width="2"/>
+  <rect x="56" y="56" width="78" height="12" rx="6" fill="#1F2937"/>
+  <rect x="56" y="76" width="108" height="12" rx="6" fill="#1F2937"/>
+  <rect x="56" y="114" width="128" height="18" rx="8" fill="#111827"/>
+  <rect x="56" y="146" width="128" height="18" rx="8" fill="#111827"/>
+  <rect x="56" y="178" width="128" height="18" rx="8" fill="#111827"/>
+  <circle cx="72" cy="123" r="6" fill="#22D3EE"/>
+  <circle cx="72" cy="155" r="6" fill="#A78BFA"/>
+  <circle cx="72" cy="187" r="6" fill="#34D399"/>
+  <rect x="230" y="56" width="60" height="12" rx="6" fill="#111827"/>
+  <rect x="230" y="76" width="120" height="12" rx="6" fill="#111827"/>
+  <rect x="230" y="126" width="124" height="14" rx="7" fill="#111827"/>
+  <rect x="230" y="148" width="124" height="14" rx="7" fill="#111827"/>
+  <rect x="230" y="170" width="88" height="14" rx="7" fill="#111827"/>
+  <rect x="230" y="192" width="140" height="14" rx="7" fill="#111827"/>
+  <rect x="230" y="214" width="110" height="14" rx="7" fill="#111827"/>
+  <rect x="328" y="50" width="40" height="32" rx="10" fill="#22D3EE" fill-opacity="0.16" stroke="#22D3EE" stroke-width="2"/>
+  <circle cx="348" cy="66" r="6" fill="#22D3EE"/>
+  <path d="M104 200H134" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+  <path d="M330 176H360" stroke="#F472B6" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(68 30) rotate(45) scale(400 270)">
+      <stop stop-color="#111827"/>
+      <stop offset="0.5" stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#0B1022"/>
+    </radialGradient>
+  </defs>
+</svg>
