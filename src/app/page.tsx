@@ -76,20 +76,20 @@ export default function Home() {
             </form>
           </FadeIn>
 
-          <FadeIn className="relative mx-auto w-[65%] max-w-2xl overflow-hidden rounded-[24px] border border-slate-300 bg-slate-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+          <FadeIn className="relative mx-auto w-full max-w-xl md:w-[65%] md:max-w-2xl overflow-hidden rounded-[24px] border border-slate-300 bg-slate-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
             <Image
               src="/f074717a-f8f6-45bd-af8b-eab85add238f_1080p_gif_30_1-1.gif"
               alt="SecondBrain abstract hero"
               width={1600}
               height={900}
-              className="aspect-[4/3] w-full bg-slate-300 object-contain"
+              className="w-full bg-slate-300 object-contain aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] max-h-[360px] sm:max-h-[420px] md:max-h-[520px]"
               priority
             />
           </FadeIn>
         </section>
 
         <section className="bg-[#0f3b45] text-white py-12">
-          <div className="section-shell flex min-h-[560px] flex-col justify-center space-y-10 py-8">
+          <div className="section-shell flex min-h-[400px] flex-col justify-center space-y-10 py-8 md:min-h-[560px]">
             <FadeIn className="text-center space-y-4">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                 Make better &amp; faster decisions
@@ -329,7 +329,7 @@ export default function Home() {
         </section>
 
         <section className="bg-[#d6cffc] py-12">
-          <div className="section-shell flex min-h-[380px] flex-col justify-center space-y-8 py-8 text-[#0f0a1f]">
+          <div className="section-shell flex min-h-[300px] flex-col justify-center space-y-8 py-8 text-[#0f0a1f] md:min-h-[380px]">
             <FadeIn className="text-center space-y-3">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                 What teams say
