@@ -42,14 +42,13 @@ const integrations = [
 
 export default function Home() {
   return (
-    <div className="bg-[#fcfaf7] text-[var(--text-primary)]">
+    <div className="bg-[#f8f2eb] text-[var(--text-primary)]">
       <Nav />
 
       <main className="space-y-0 pb-0">
         <section id="top" className="section-shell space-y-12 pt-20 pb-16 text-center">
           <FadeIn className="space-y-4">
             <div className="space-y-2">
-              <p className="text-lg font-semibold text-[#0c172a]">🧠</p>
               <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
               Your Brain Is Doing Too Much </h1>
             </div>
@@ -128,7 +127,7 @@ export default function Home() {
               Why you should clone your expertise
             </h2>
             <p className="text-base text-[var(--text-secondary)]">
-              AI plus an understanding of how you think, for every question you&apos;d answer.
+              Your knowledge, ready on demand.
             </p>
           </FadeIn>
 
@@ -137,29 +136,36 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold text-[#0f172a]">Stop repeating yourself</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  Eliminate hours spent re-explaining the same context, so you&apos;re team is never stuck.
+                  Answer once. Reuse everywhere.
                 </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-600">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-[#0f172a]">
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    Clone briefing ready
-                  </span>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-[#0f172a]">Real-time</span>
-                </div>
-                <div className="mt-3 grid grid-cols-3 gap-3 text-center text-[13px] text-slate-700">
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-4 shadow-sm">
-                    <p className="font-semibold text-[#0f172a]">Emails</p>
-                    <p className="text-[11px] text-slate-500">Threads + links</p>
+              <div className="rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="h-8 w-8 rounded-full bg-[#d9cdc3]" />
+                    <div className="flex-1 space-y-2">
+                      <div className="w-20 rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-[#6f5a4c] shadow-sm">
+                        Ask
+                      </div>
+                      <div className="h-6 w-32 rounded-2xl bg-white/90 shadow-sm" />
+                    </div>
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-4 shadow-sm">
-                    <p className="font-semibold text-[#0f172a]">Transcripts</p>
-                    <p className="text-[11px] text-slate-500">Calls + meetings</p>
+                  <div className="flex items-start justify-end gap-3">
+                    <div className="flex-1 space-y-2">
+                      <div className="ml-auto w-24 rounded-2xl bg-[#f3e7dd] px-3 py-2 text-xs font-semibold text-[#8d5a3c] shadow-sm text-right">
+                        Answer
+                      </div>
+                      <div className="ml-auto h-6 w-36 rounded-2xl bg-[#f3e7dd]/80 shadow-sm" />
+                    </div>
+                    <div className="h-8 w-8 rounded-full bg-[#d89162]" />
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-4 shadow-sm">
-                    <p className="font-semibold text-[#0f172a]">Docs</p>
-                    <p className="text-[11px] text-slate-500">Decisions + memos</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[0, 1, 2].map((idx) => (
+                      <div key={idx} className="rounded-xl border border-[#eaded4] bg-white/80 p-3 shadow-sm">
+                        <div className="h-2 w-12 rounded-full bg-[#e7ded6]" />
+                        <div className="mt-2 h-2 w-8 rounded-full bg-[#e1c8b6]" />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -167,75 +173,69 @@ export default function Home() {
 
             <FadeIn className={knowledgeCardClass} delay={0.04}>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[#0f172a]">
-                  You can see your answer through every stakeholder&apos;s eyes
-                </h3>
+                <h3 className="text-xl font-semibold text-[#0f172a]">See every stakeholder view</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  See how your response might land with different people and give context to refine it.
+                  Preview tone and impact.
                 </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="text-sm font-semibold text-[#0f172a]">Stakeholder views</div>
-                <div className="mt-3 grid grid-cols-2 gap-3 text-xs font-semibold text-slate-700">
-                  {["Team", "Manager", "Client", "Executive", "New hire", "Partner"].map((label) => (
-                    <div
-                      key={label}
-                      className="rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span>{label}</span>
-                        <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                      </div>
-                      <p className="mt-1 text-[11px] text-slate-500">Tone + clarity check</p>
-                    </div>
-                  ))}
+              <div className="rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-wide text-[#6f5a4c]">
+                    <span className="rounded-full bg-[#f3e7dd] px-2 py-1">You</span>
+                    <span className="rounded-full bg-[#f3e7dd] px-2 py-1">Team</span>
+                    <span className="rounded-full bg-[#f3e7dd] px-2 py-1">Exec</span>
+                  </div>
+                  <svg viewBox="0 0 200 110" className="mt-4 h-20 w-full" fill="none">
+                    <circle cx="100" cy="55" r="16" fill="#0f172a" />
+                    {[
+                      [30, 16],
+                      [170, 16],
+                      [30, 94],
+                      [170, 94],
+                      [100, 10],
+                      [100, 100],
+                    ].map(([x, y]) => (
+                      <g key={`${x}-${y}`}>
+                        <circle cx={x} cy={y} r="10" fill="#eaded4" />
+                        <path d={`M100 55 L${x} ${y}`} stroke="#c2b2a6" strokeWidth="2" />
+                      </g>
+                    ))}
+                  </svg>
                 </div>
               </div>
             </FadeIn>
 
             <FadeIn className={knowledgeCardClass} delay={0.08}>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[#0f172a]">Your answer fits the moment</h3>
+                <h3 className="text-xl font-semibold text-[#0f172a]">Right depth, every time</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  Because every question needs different depth, SecondBrain helps you find the right level of detail for every asker.
+                  Dial detail in seconds.
                 </p>
               </div>
-              <div className="space-y-3 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="grid grid-cols-3 gap-3 text-xs font-semibold text-slate-700">
-                  {[
-                    { label: "Quick", pills: ["Summary", "Brief", "Fast"] },
-                    { label: "Technical", pills: ["Deep dive", "Complete", "Thorough"] },
-                    { label: "Strategic", pills: ["Executive", "Concise", "Essential"] },
-                  ].map((block) => (
-                    <div key={block.label} className="space-y-2 rounded-xl border border-slate-200 bg-white p-3">
-                      <div className="text-[11px] uppercase tracking-wide text-slate-400">{block.label}</div>
-                      <div className="flex flex-wrap gap-1">
-                        {block.pills.map((pill) => (
-                          <span key={pill} className="rounded-full bg-slate-100 px-2 py-1 text-[11px] text-slate-700">
-                            {pill}
-                          </span>
-                        ))}
+              <div className="space-y-3 rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <div className="grid grid-cols-3 gap-3 text-[10px] font-semibold uppercase tracking-wide text-[#6f5a4c]">
+                    <div className="rounded-xl border border-[#eaded4] bg-white p-3 text-center shadow-sm">
+                      Brief
+                      <div className="mt-3 h-2 w-full rounded-full bg-[#f3e7dd]">
+                        <div className="h-2 w-1/4 rounded-full bg-[#d89162]" />
                       </div>
                     </div>
-                  ))}
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                  <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-600">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-slate-900 text-white text-[10px]">✎</span>
-                    Adjust for the asker
+                    <div className="rounded-xl border border-[#d8bfae] bg-[#f3e7dd] p-3 text-center shadow-sm">
+                      Standard
+                      <div className="mt-3 h-2 w-full rounded-full bg-white/70">
+                        <div className="h-2 w-2/3 rounded-full bg-[#c9825b]" />
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-[#eaded4] bg-white p-3 text-center shadow-sm">
+                      Deep
+                      <div className="mt-3 h-2 w-full rounded-full bg-[#f3e7dd]">
+                        <div className="h-2 w-4/5 rounded-full bg-[#b96d4a]" />
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm text-slate-700">
-                    &quot;Pricing starts at $50/seat, scales with usage. Let me tailor the detail based on how you&apos;ll use it.&quot;
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
-                    {["Add context", "Simplify", "Add examples", "Cite sources", "Translate"].map((action) => (
-                      <span
-                        key={action}
-                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 shadow-sm"
-                      >
-                        {action}
-                      </span>
-                    ))}
+                  <div className="mt-4 rounded-full bg-[#efe4da] p-2">
+                    <div className="h-2 w-1/2 rounded-full bg-[#c9825b]" />
                   </div>
                 </div>
               </div>
@@ -243,57 +243,70 @@ export default function Home() {
 
             <FadeIn className={knowledgeCardClass} delay={0.12}>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[#0f172a]">AI adapts your answer for clarity</h3>
+                <h3 className="text-xl font-semibold text-[#0f172a]">Clarity on demand</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  Rephrase responses to keep your intent while adding the right level of detail, so every answer lands clearly.
-                </p>
-                <p className="text-sm font-semibold text-[#0f172a]">
-                  Choose how detailed to make the answer and keep moving—no more re-explaining.
+                  Rewrite without losing intent.
                 </p>
               </div>
-              <div className="space-y-3 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                  <span>Clarity + intent aligned</span>
-                </div>
-                <div className="grid grid-cols-2 gap-3 text-sm text-slate-700">
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
-                    <div className="text-xs font-semibold text-slate-500">Before</div>
-                    <div className="mt-2 h-14 rounded-lg bg-slate-100" />
+              <div className="space-y-3 rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="grid grid-cols-2 gap-3 text-[10px] font-semibold uppercase tracking-wide text-[#6f5a4c]">
+                  <div className="rounded-xl border border-[#eaded4] bg-white p-4 text-center shadow-sm">
+                    Before
+                    <div className="mt-3 space-y-2">
+                      <div className="h-2 w-full rounded-full bg-[#f1e6dc]" />
+                      <div className="h-2 w-4/5 rounded-full bg-[#f1e6dc]" />
+                      <div className="h-2 w-3/5 rounded-full bg-[#f1e6dc]" />
+                    </div>
                   </div>
-                  <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 px-3 py-3 shadow-sm">
-                    <div className="text-xs font-semibold text-emerald-700">After</div>
-                    <div className="mt-2 h-14 rounded-lg bg-emerald-100" />
+                  <div className="rounded-xl border border-[#d8bfae] bg-[#f3e7dd] p-4 text-center shadow-sm text-[#8d5a3c]">
+                    After
+                    <div className="mt-3 space-y-2">
+                      <div className="h-2 w-full rounded-full bg-[#e1c8b6]" />
+                      <div className="h-2 w-5/6 rounded-full bg-[#e1c8b6]" />
+                      <div className="h-2 w-2/3 rounded-full bg-[#e1c8b6]" />
+                    </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
-                  {["Clarity pass", "Detail match", "Source check"].map((pill) => (
-                    <span key={pill} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 shadow-sm">
-                      {pill}
-                    </span>
-                  ))}
+                <div className="rounded-full bg-[#efe4da] p-2">
+                  <div className="h-2 w-3/4 rounded-full bg-[#c9825b]" />
                 </div>
               </div>
             </FadeIn>
 
             <FadeIn className={knowledgeCardClass} delay={0.16}>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[#0f172a]">Get instant variations without losing your voice</h3>
+                <h3 className="text-xl font-semibold text-[#0f172a]">One voice, many styles</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  Pick response styles and keep the core intact. SecondBrain refines context while staying true to what you&apos;d actually say.
+                  Variations that still sound like you.
                 </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="grid grid-cols-2 gap-3 text-xs font-semibold text-slate-700">
-                  {["Friendly + brief", "Direct + structured", "Executive summary", "Technical detail"].map((style) => (
-                    <div
-                      key={style}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                      <span>{style}</span>
-                    </div>
-                  ))}
+              <div className="rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <div className="grid grid-cols-3 gap-3">
+                    {[0, 1, 2].map((idx) => (
+                      <div key={idx} className="rounded-2xl border border-[#eaded4] bg-[#f6eee6] p-4">
+                        <div className="h-10 w-10 rounded-full bg-[#e1c8b6]" />
+                        <div className="mt-3 space-y-2">
+                          <div className="h-2 w-full rounded-full bg-[#e7ded6]" />
+                          <div className="h-2 w-4/5 rounded-full bg-[#e7ded6]" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <div className="inline-flex items-center rounded-full bg-[#f3e7dd] px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-[#6f5a4c]">
+                    Voice
+                  </div>
+                  <svg viewBox="0 0 200 60" className="mt-3 h-12 w-full text-[#c2b2a6]" fill="none">
+                    <path
+                      d="M10 40 C25 10, 45 10, 60 40 S95 70, 110 40 S145 10, 160 40 S185 70, 190 40"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="100" cy="40" r="6" fill="#c9825b" />
+                  </svg>
                 </div>
               </div>
             </FadeIn>
@@ -302,24 +315,35 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold text-[#0f172a]">Keep context across every tool you use</h3>
                 <p className="text-[15px] text-[var(--text-secondary)]">
-                  SecondBrain remembers your team&apos;s decisions, priorities, and history wherever questions come in—Slack, email, docs, and beyond.
+                  Context stays in sync.
                 </p>
               </div>
-              <div className="space-y-3 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-inner">
-                <div className="grid grid-cols-3 gap-2 text-sm font-semibold text-[#0f172a]">
-                  {["Slack", "Gmail", "Notion", "Docs", "Linear", "Jira"].map((tool) => (
-                    <div key={tool} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-center shadow-sm">
-                      {tool}
-                    </div>
-                  ))}
+              <div className="space-y-3 rounded-2xl border border-[#eaded4] bg-[#f8f2eb] p-4 shadow-inner">
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <div className="grid grid-cols-3 gap-2 text-[10px] font-semibold uppercase tracking-wide text-[#6f5a4c]">
+                    {["Mail", "Docs", "Chat"].map((label) => (
+                      <div key={label} className="rounded-xl border border-[#eaded4] bg-[#f6eee6] p-3 text-center">
+                        <div className="mx-auto h-8 w-8 rounded-2xl bg-[#e1c8b6]" />
+                        <div className="mt-2">{label}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#0f172a] px-3 py-1 text-xs font-semibold text-white shadow-sm">
-                  <span className="grid h-4 w-4 place-items-center rounded-full bg-emerald-500 text-[10px] text-white">✓</span>
-                  History + priorities synced
-                </div>
-                <div className="space-y-1 text-sm text-slate-700">
-                  <p>SecondBrain brings your past decisions into every tool, so you don&apos;t restart context each time someone asks.</p>
-                  <p>Consistent answers, consistent sources, everywhere you&apos;re asked.</p>
+                <div className="rounded-xl border border-[#eaded4] bg-white p-4 shadow-sm">
+                  <svg viewBox="0 0 200 90" className="h-16 w-full" fill="none">
+                    <circle cx="100" cy="45" r="14" fill="#0f172a" />
+                    {[30, 70, 130, 170].map((x, idx) => (
+                      <g key={x}>
+                        <circle cx={x} cy={idx % 2 ? 20 : 70} r="10" fill="#eaded4" />
+                        <path
+                          d={`M100 45 L${x} ${idx % 2 ? 20 : 70}`}
+                          stroke="#c2b2a6"
+                          strokeWidth="2"
+                        />
+                      </g>
+                    ))}
+                    <circle cx="130" cy="70" r="10" fill="#c9825b" />
+                  </svg>
                 </div>
               </div>
             </FadeIn>
@@ -361,7 +385,7 @@ Hear from early superhumans            </h2>
           </div>
         </section>
 
-        <section className="bg-[#f7f3ea] py-16">
+        <section className="bg-[#f8f2eb] py-16">
           <div className="section-shell space-y-6 text-center text-[#0f172a]">
             <FadeIn className="space-y-2">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Integrates with tools you use</h2>
@@ -386,25 +410,32 @@ Hear from early superhumans            </h2>
           </div>
         </section>
 
-        <section className="bg-[#fcf6ef] py-18">
+        <section className="bg-[#f8f2eb] py-18">
           <div className="section-shell space-y-10">
-            <FadeIn className="relative overflow-hidden rounded-[28px] border border-[#f1e3d6] bg-gradient-to-br from-[#ffdec5] via-[#ffb48f] to-[#f15a3c] px-8 py-16 text-center text-white shadow-[0_28px_70px_rgba(0,0,0,0.12)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.28),transparent_35%),radial-gradient(circle_at_80%_15%,rgba(255,255,255,0.2),transparent_38%)]" />
+            <FadeIn className="relative overflow-hidden rounded-[24px] border border-[#ead8cb] bg-gradient-to-br from-[#e5a26f] via-[#d05b3b] to-[#b12a2a] px-8 py-16 text-center text-white shadow-[0_28px_70px_rgba(0,0,0,0.2)]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(255,255,255,0.22),transparent_45%),radial-gradient(circle_at_70%_10%,rgba(255,255,255,0.16),transparent_50%)]" />
               <div className="relative mx-auto max-w-3xl space-y-4">
-                <div className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-white/50 bg-white/15 text-lg font-semibold">
-                  SB
-                </div>
                 <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">How SecondBrain works</h2>
-                <p className="text-base text-white/85">
-3 simple steps:                </p>
-                <div className="flex justify-center pt-2">
-                  <a
-                    href="#cta"
-                    className="inline-flex items-center justify-center rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-[#c03f2a] shadow-[0_16px_34px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                <p className="text-base text-white/80">
+                Ready to turn yourself into an enterprise-scale product? Join the exclusive community building transformational businesses.
+</p>
+                <form className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center" action="#cta">
+                  <label className="sr-only" htmlFor="cta-email">
+                    Work email
+                  </label>
+                  <input
+                    id="cta-email"
+                    type="email"
+                    placeholder="you@company.com"
+                    className="w-full max-w-xs rounded-lg border border-white/25 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/60 shadow-sm outline-none transition focus:border-white/60 focus:ring-2 focus:ring-white/20"
+                  />
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-lg bg-black/90 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] transition hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_20px_40px_rgba(0,0,0,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     Get Early Access
-                  </a>
-                </div>
+                  </button>
+                </form>
               </div>
             </FadeIn>
 
